@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://models/cube.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://scripts/ExampleSquare.gd" type="Script" id=2]
+[ext_resource path="res://scripts/ExampleCube.gd" type="Script" id=3]
+[ext_resource path="res://models/hollow-cube.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://scripts/ExampleTesseract.gd" type="Script" id=5]
+[ext_resource path="res://fonts/Roboto.tres" type="DynamicFont" id=6]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.419608, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0, 1, 0, 1 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033029, -0.246884, 0.205991 )
+script = ExtResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="Spatial2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.208777, -0.0501513, 0 )
+script = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial2"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="Spatial3" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0864927, 0.0261216, -0.267223 )
+script = ExtResource( 5 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial3"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+mesh = ExtResource( 4 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="Spatial3"]
+transform = Transform( 0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0 )
+mesh = ExtResource( 4 )
+material/0 = null
+
+[node name="Spatial4" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial4"]
+transform = Transform( -0.0133207, 0.0654027, 0.074465, -0.08544, 0.0304978, -0.0420702, -0.0502252, -0.0692269, 0.0518176, 0, 0, 0 )
+mesh = ExtResource( 4 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="Spatial4"]
+transform = Transform( 0.0478401, -0.0300266, 0.0202419, 0.0250752, 0.0516652, 0.0173764, -0.0261259, -0.00539533, 0.0537432, 0, 0, 0 )
+mesh = ExtResource( 4 )
+material/0 = null
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.09339 )
+
+[node name="Camera2" type="Camera" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 2 )
+current = true
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control"]
+margin_left = 473.045
+margin_top = 358.752
+margin_right = 513.045
+margin_bottom = 387.752
+custom_fonts/font = ExtResource( 6 )
+text = "144"
+
+[node name="Label2" type="Label" parent="Control"]
+margin_left = 387.326
+margin_top = 271.445
+margin_right = 427.326
+margin_bottom = 300.445
+custom_fonts/font = ExtResource( 6 )
+text = "216"
+
+[node name="Label3" type="Label" parent="Control"]
+margin_left = 487.332
+margin_top = 249.222
+margin_right = 527.332
+margin_bottom = 278.222
+custom_fonts/font = ExtResource( 6 )
+text = "625"
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 1, 0, 0, -3.8667 )
+material_override = SubResource( 1 )
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 1, 0, 0, 7.09972 )
+material_override = SubResource( 2 )

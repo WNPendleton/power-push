@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://fonts/Roboto.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/MainMenu.gd" type="Script" id=2]
@@ -9,6 +9,12 @@
 [ext_resource path="res://scripts/ExampleCube.gd" type="Script" id=7]
 [ext_resource path="res://scripts/ExampleTesseract.gd" type="Script" id=8]
 [ext_resource path="res://models/hollow-cube.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://sfx/menuButtonSound.wav" type="AudioStream" id=10]
+[ext_resource path="res://scripts/ButtonSounds.gd" type="Script" id=11]
+[ext_resource path="res://music/loop.wav" type="AudioStream" id=12]
+[ext_resource path="res://music/intro.wav" type="AudioStream" id=13]
+[ext_resource path="res://scripts/MusicLoop.gd" type="Script" id=14]
+[ext_resource path="res://default_env.tres" type="Environment" id=15]
 
 [node name="Game" type="Node"]
 
@@ -31,8 +37,8 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -85.5
-margin_right = 85.5
+margin_left = -69.5
+margin_right = 69.5
 custom_constants/separation = 20
 alignment = 1
 __meta__ = {
@@ -41,33 +47,34 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="UI/Main/VBoxContainer"]
 margin_top = 263.0
-margin_right = 171.0
+margin_right = 139.0
 margin_bottom = 292.0
 custom_fonts/font = ExtResource( 1 )
 text = "Power Push"
 
 [node name="Start" type="Button" parent="UI/Main/VBoxContainer"]
 margin_top = 312.0
-margin_right = 171.0
+margin_right = 139.0
 margin_bottom = 347.0
 custom_fonts/font = ExtResource( 1 )
 text = "Start"
 
 [node name="Instructions" type="Button" parent="UI/Main/VBoxContainer"]
 margin_top = 367.0
-margin_right = 171.0
+margin_right = 139.0
 margin_bottom = 402.0
 custom_fonts/font = ExtResource( 1 )
 text = "Instructions"
 
 [node name="Credits" type="Button" parent="UI/Main/VBoxContainer"]
 margin_top = 422.0
-margin_right = 171.0
+margin_right = 139.0
 margin_bottom = 457.0
 custom_fonts/font = ExtResource( 1 )
 text = "Credits"
 
 [node name="Instructions" type="Control" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -78,10 +85,8 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -398.5
-margin_top = 20.0
-margin_right = 398.5
-margin_bottom = -20.0
+margin_left = -319.5
+margin_right = 319.5
 custom_constants/separation = 20
 alignment = 1
 __meta__ = {
@@ -89,9 +94,9 @@ __meta__ = {
 }
 
 [node name="Instructions" type="Label" parent="UI/Instructions/VBoxContainer"]
-margin_top = 86.0
-margin_right = 797.0
-margin_bottom = 211.0
+margin_top = 106.0
+margin_right = 639.0
+margin_bottom = 231.0
 custom_fonts/font = ExtResource( 1 )
 text = "Use the number keys on your keyboard to target the cannon!
 Type the correct root of a shape to target it!
@@ -100,10 +105,10 @@ Press Backspace or Delete to remove a number you typed!"
 align = 1
 
 [node name="GridContainer" type="GridContainer" parent="UI/Instructions/VBoxContainer"]
-margin_left = 170.0
-margin_top = 231.0
-margin_right = 626.0
-margin_bottom = 539.0
+margin_left = 91.0
+margin_top = 251.0
+margin_right = 547.0
+margin_bottom = 559.0
 size_flags_horizontal = 4
 columns = 2
 
@@ -115,16 +120,17 @@ margin_bottom = 100.0
 size = Vector2( 100, 100 )
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="Camera" type="Camera" parent="UI/Instructions/VBoxContainer/GridContainer/Square/Viewport"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 5 )
 
 [node name="Spatial" type="Spatial" parent="UI/Instructions/VBoxContainer/GridContainer/Square/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.5 )
 script = ExtResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="UI/Instructions/VBoxContainer/GridContainer/Square/Viewport/Spatial"]
-transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0, 5.5 )
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0, 0 )
 mesh = ExtResource( 5 )
 material/0 = null
 
@@ -147,7 +153,7 @@ margin_bottom = 204.0
 size = Vector2( 100, 100 )
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="Camera" type="Camera" parent="UI/Instructions/VBoxContainer/GridContainer/Cube/Viewport"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5, 0, 5 )
@@ -180,7 +186,7 @@ margin_bottom = 308.0
 size = Vector2( 100, 100 )
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="Camera" type="Camera" parent="UI/Instructions/VBoxContainer/GridContainer/Tesseract/Viewport"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10, 0, 5 )
@@ -210,15 +216,16 @@ root into the cannon to target it!"
 align = 1
 
 [node name="Return" type="Button" parent="UI/Instructions/VBoxContainer"]
-margin_left = 357.0
-margin_top = 559.0
-margin_right = 439.0
-margin_bottom = 594.0
+margin_left = 278.0
+margin_top = 579.0
+margin_right = 360.0
+margin_bottom = 614.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 1 )
 text = "Return"
 
 [node name="Credits" type="Control" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -229,8 +236,8 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -344.0
-margin_right = 344.0
+margin_left = -205.5
+margin_right = 205.5
 custom_constants/separation = 20
 alignment = 1
 __meta__ = {
@@ -238,25 +245,29 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="UI/Credits/VBoxContainer"]
-margin_top = 206.0
-margin_right = 688.0
-margin_bottom = 459.0
+margin_top = 142.0
+margin_right = 411.0
+margin_bottom = 523.0
 custom_fonts/font = ExtResource( 1 )
 text = "Game by Walker Pendleton
+
+Music by Permadeaf (permadeaf.com)
 
 Created for Global Game Jam 2023
 
 Special thanks to:
-Godot Engine
-Paint.net
-The Blender Foundation"
+Godot Engine (godotengine.org)
+JSFXR (sfxr.me)
+Paint.net (getpaint.net)
+The Blender Foundation (blender.org)
+University of Nebraska (nebraska.edu)"
 align = 1
 
 [node name="Return" type="Button" parent="UI/Credits/VBoxContainer"]
-margin_left = 303.0
-margin_top = 479.0
-margin_right = 385.0
-margin_bottom = 514.0
+margin_left = 164.0
+margin_top = 543.0
+margin_right = 246.0
+margin_bottom = 578.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 1 )
 text = "Return"
@@ -264,10 +275,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ButtonSounds" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource( 10 )
+script = ExtResource( 11 )
+
 [node name="World" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="World"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.99972 )
+visible = false
 current = true
 
 [node name="Stained Glass" type="CSGBox" parent="World"]
@@ -278,8 +294,30 @@ material_override = ExtResource( 4 )
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 0.1, 0, 0, -1.50315 )
 material = ExtResource( 3 )
 
+[node name="MusicIntro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+autoplay = true
+
+[node name="MusicLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+script = ExtResource( 14 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 15 )
+
+[connection signal="mouse_entered" from="UI/Main/VBoxContainer/Start" to="UI/ButtonSounds" method="_on_Button_mouse_entered"]
 [connection signal="pressed" from="UI/Main/VBoxContainer/Start" to="UI" method="_on_Start_pressed"]
+[connection signal="pressed" from="UI/Main/VBoxContainer/Start" to="UI/ButtonSounds" method="_on_Button_pressed"]
+[connection signal="mouse_entered" from="UI/Main/VBoxContainer/Instructions" to="UI/ButtonSounds" method="_on_Button_mouse_entered"]
 [connection signal="pressed" from="UI/Main/VBoxContainer/Instructions" to="UI" method="_on_Instructions_pressed"]
+[connection signal="pressed" from="UI/Main/VBoxContainer/Instructions" to="UI/ButtonSounds" method="_on_Button_pressed"]
+[connection signal="mouse_entered" from="UI/Main/VBoxContainer/Credits" to="UI/ButtonSounds" method="_on_Button_mouse_entered"]
 [connection signal="pressed" from="UI/Main/VBoxContainer/Credits" to="UI" method="_on_Credits_pressed"]
+[connection signal="pressed" from="UI/Main/VBoxContainer/Credits" to="UI/ButtonSounds" method="_on_Button_pressed"]
+[connection signal="mouse_entered" from="UI/Instructions/VBoxContainer/Return" to="UI/ButtonSounds" method="_on_Button_mouse_entered"]
 [connection signal="pressed" from="UI/Instructions/VBoxContainer/Return" to="UI" method="_on_Return_pressed"]
+[connection signal="pressed" from="UI/Instructions/VBoxContainer/Return" to="UI/ButtonSounds" method="_on_Button_pressed"]
+[connection signal="mouse_entered" from="UI/Credits/VBoxContainer/Return" to="UI/ButtonSounds" method="_on_Button_mouse_entered"]
 [connection signal="pressed" from="UI/Credits/VBoxContainer/Return" to="UI" method="_on_Return_pressed"]
+[connection signal="pressed" from="UI/Credits/VBoxContainer/Return" to="UI/ButtonSounds" method="_on_Button_pressed"]
+[connection signal="finished" from="MusicIntro" to="MusicLoop" method="_on_MusicIntro_finished"]

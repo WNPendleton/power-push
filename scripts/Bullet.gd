@@ -8,7 +8,7 @@ var direction
 export var rotationVector = Vector3(2, 3, 5)
 export var rotationSpeed = 5
 export var speed = 3
-export var turning_speed = 0.1
+export var turning_speed = 0.04
 export var max_age = 3
 
 onready var model = $Model
@@ -32,7 +32,7 @@ func _process(delta):
 	
 	if is_instance_valid(target):
 		var target_direction = global_transform.origin.direction_to(target.global_transform.origin)
-		direction = lerp(direction, target_direction, (turning_speed*age) * delta * 100).normalized()
+		direction = lerp(direction, target_direction, (turning_speed*pow(max(age, 1), 2)) * delta * 100).normalized()
 		global_transform.origin = global_transform.origin + (direction * speed * delta)
 	else:
 		queue_free()

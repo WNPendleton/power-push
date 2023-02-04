@@ -57,7 +57,7 @@ func create_enemy():
 		newEnemy.set_answer(randi()%(9*difficulty/max_difficulty)+1)
 	else:
 		newEnemy = square_prefab.instance()
-		newEnemy.set_answer(randi()%(31*difficulty/max_difficulty)+1)
+		newEnemy.set_answer(randi()%(24*difficulty/max_difficulty)+1)
 	return newEnemy
 
 func decrease_spawn_delay():

@@ -10,6 +10,7 @@ onready var world = get_tree().get_current_scene().get_node("World")
 onready var cannon = world.get_node("Cannon")
 onready var bulletDestination = cannon.get_node("BulletDestination")
 onready var enemy_parent = world.get_node("EnemySpawner")
+onready var shoot_sound = get_tree().get_current_scene().get_node("ShootSound")
 
 func _process(_delta):
 	if Input.is_action_just_pressed("input_0"):
@@ -40,6 +41,8 @@ func _process(_delta):
 	text = value
 
 func do_shoot():
+	shoot_sound.play()
+	cannon.animate_muzzle_flash()
 	bulletCount += 1
 	var newBullet = bulletPrefab.instance()
 	world.add_child(newBullet)

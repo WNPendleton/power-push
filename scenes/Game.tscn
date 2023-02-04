@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/Cannon.gd" type="Script" id=1]
 [ext_resource path="res://models/cannon.obj" type="ArrayMesh" id=2]
@@ -9,6 +9,16 @@
 [ext_resource path="res://scripts/UIController.gd" type="Script" id=7]
 [ext_resource path="res://materials/StainedGlass.tres" type="Material" id=8]
 [ext_resource path="res://scripts/Camera.gd" type="Script" id=9]
+[ext_resource path="res://scripts/ButtonSounds.gd" type="Script" id=10]
+[ext_resource path="res://sfx/menuButtonSound.wav" type="AudioStream" id=11]
+[ext_resource path="res://sfx/shootSound.wav" type="AudioStream" id=12]
+[ext_resource path="res://sfx/explosionSound.wav" type="AudioStream" id=13]
+[ext_resource path="res://sprites/muzzleFlash.png" type="Texture" id=14]
+[ext_resource path="res://music/loop.wav" type="AudioStream" id=15]
+[ext_resource path="res://music/intro.wav" type="AudioStream" id=16]
+[ext_resource path="res://scripts/MusicLoop.gd" type="Script" id=17]
+[ext_resource path="res://sprites/life.png" type="Texture" id=18]
+[ext_resource path="res://default_env.tres" type="Environment" id=19]
 
 [sub_resource type="SphereShape" id=1]
 
@@ -45,6 +55,15 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="World/Cannon"]
 shape = SubResource( 1 )
 
+[node name="MuzzleFlash" type="Spatial" parent="World/Cannon"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44, 0 )
+
+[node name="Sprite3D" type="Sprite3D" parent="World/Cannon/MuzzleFlash"]
+offset = Vector2( 0, 32 )
+texture = ExtResource( 14 )
+
+[node name="Tween" type="Tween" parent="World/Cannon"]
+
 [node name="Camera" type="Camera" parent="World"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 current = true
@@ -76,35 +95,50 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD"]
 anchor_right = 1.0
-margin_left = 25.0
-margin_top = 25.0
-margin_right = -25.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = 29.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Score" type="Label" parent="UI/HUD/HBoxContainer"]
-margin_right = 613.0
-margin_bottom = 36.0
+margin_top = 1.0
+margin_right = 618.0
+margin_bottom = 30.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 4 )
-text = "Score: 0"
+text = "00000"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Lives" type="Label" parent="UI/HUD/HBoxContainer"]
-margin_left = 617.0
-margin_right = 1230.0
-margin_bottom = 36.0
+[node name="Lives" type="HBoxContainer" parent="UI/HUD/HBoxContainer"]
+margin_left = 622.0
+margin_right = 1240.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 4 )
-text = "Lives: 3"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/HBoxContainer/Lives"]
+margin_left = 514.0
+margin_right = 546.0
+margin_bottom = 32.0
+texture = ExtResource( 18 )
+
+[node name="TextureRect2" type="TextureRect" parent="UI/HUD/HBoxContainer/Lives"]
+margin_left = 550.0
+margin_right = 582.0
+margin_bottom = 32.0
+texture = ExtResource( 18 )
+
+[node name="TextureRect3" type="TextureRect" parent="UI/HUD/HBoxContainer/Lives"]
+margin_left = 586.0
+margin_right = 618.0
+margin_bottom = 32.0
+texture = ExtResource( 18 )
 
 [node name="GameOverScreen" type="Control" parent="UI"]
 anchor_right = 1.0
@@ -117,8 +151,8 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -106.5
-margin_right = 106.5
+margin_left = -85.0
+margin_right = 85.0
 custom_constants/separation = 100
 alignment = 1
 __meta__ = {
@@ -126,26 +160,51 @@ __meta__ = {
 }
 
 [node name="GameOver" type="Label" parent="UI/GameOverScreen/VBoxContainer"]
-margin_top = 203.0
-margin_right = 213.0
-margin_bottom = 239.0
+margin_top = 213.0
+margin_right = 170.0
+margin_bottom = 242.0
 custom_fonts/font = ExtResource( 4 )
 text = "Game Over!"
 align = 1
 valign = 1
 
 [node name="FinalScore" type="Label" parent="UI/GameOverScreen/VBoxContainer"]
-margin_top = 339.0
-margin_right = 213.0
-margin_bottom = 375.0
+margin_top = 342.0
+margin_right = 170.0
+margin_bottom = 371.0
 custom_fonts/font = ExtResource( 4 )
 text = "Final Score: 500"
+align = 1
 
 [node name="Restart" type="Button" parent="UI/GameOverScreen/VBoxContainer"]
-margin_top = 475.0
-margin_right = 213.0
-margin_bottom = 517.0
+margin_top = 471.0
+margin_right = 170.0
+margin_bottom = 506.0
 custom_fonts/font = ExtResource( 4 )
 text = "Restart"
 
+[node name="ButtonSounds" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+script = ExtResource( 10 )
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+
+[node name="MusicIntro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+autoplay = true
+
+[node name="MusicLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+script = ExtResource( 17 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 19 )
+
+[connection signal="mouse_entered" from="UI/GameOverScreen/VBoxContainer/Restart" to="ButtonSounds" method="_on_Button_mouse_entered"]
 [connection signal="pressed" from="UI/GameOverScreen/VBoxContainer/Restart" to="UI" method="_on_Restart_pressed"]
+[connection signal="pressed" from="UI/GameOverScreen/VBoxContainer/Restart" to="ButtonSounds" method="_on_Button_pressed"]
+[connection signal="finished" from="MusicIntro" to="MusicLoop" method="_on_MusicIntro_finished"]

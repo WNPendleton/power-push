@@ -26,9 +26,11 @@ func _on_Area_area_entered(area):
 	if area.has_method("damage"):
 		area.damage()
 		do_big_shake()
+		play_big_explosion()
 		do_death_animation_then_delete()
 
 func destroy():
 	UI.score_points(3 * answer)
 	do_little_shake()
+	play_little_explosion()
 	do_death_animation_then_delete()

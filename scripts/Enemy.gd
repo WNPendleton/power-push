@@ -2,6 +2,7 @@ extends Spatial
 
 onready var cannon = get_tree().get_current_scene().get_node("World/Cannon")
 onready var camera = get_tree().get_current_scene().get_node("World/Camera")
+onready var explosion_sound = get_tree().get_current_scene().get_node("ExplosionSound")
 onready var UI = get_tree().get_current_scene().get_node("UI")
 onready var tween = $Tween
 onready var target_indicator = $Target
@@ -51,7 +52,16 @@ func do_big_shake():
 func do_little_shake():
 	camera.do_camera_shake(0.08, 0.2)
 
+func play_big_explosion():
+	explosion_sound.pitch_scale = 0.66
+	explosion_sound.play()
+
+func play_little_explosion():
+	explosion_sound.pitch_scale = 1
+	explosion_sound.play()
+
 func do_death_animation_then_delete():
+	targeted = true
 	death_sprite.show()
 	$Area.hide()
 	$Area/CollisionShape.disabled = true
