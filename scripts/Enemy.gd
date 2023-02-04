@@ -1,6 +1,7 @@
 extends Spatial
 
 onready var cannon = get_tree().get_current_scene().get_node("World/Cannon")
+onready var UI = get_tree().get_current_scene().get_node("UI")
 onready var tween = $Tween
 
 var travel_time = 10
@@ -23,6 +24,3 @@ func get_id():
 
 func target():
 	targeted = true
-
-func destroy():
-	queue_free()

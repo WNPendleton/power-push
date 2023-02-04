@@ -31,3 +31,7 @@ func _on_Area_area_entered(area):
 	if area.has_method("damage"):
 		area.damage()
 		queue_free()
+
+func destroy():
+	UI.score_points(4 * answer)
+	queue_free()

@@ -20,4 +20,4 @@ func damage():
 		UI.update_lives(lives)
 
 func do_game_over():
-	get_tree().quit()
+	UI.do_game_over()
