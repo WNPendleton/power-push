@@ -9,6 +9,7 @@ onready var bulletOrigin = get_tree().get_current_scene().get_node("World/Cannon
 onready var world = get_tree().get_current_scene().get_node("World")
 onready var cannon = world.get_node("Cannon")
 onready var bulletDestination = cannon.get_node("BulletDestination")
+onready var enemy_parent = world.get_node("EnemySpawner")
 
 func _process(_delta):
 	if Input.is_action_just_pressed("input_0"):
@@ -42,9 +43,20 @@ func do_shoot():
 	bulletCount += 1
 	var newBullet = bulletPrefab.instance()
 	world.add_child(newBullet)
-	var newTarget = targetPrefab.instance()
-	world.add_child(newTarget)
+	
+	var newTarget = get_target(int(value))
+	
+	if newTarget == null:
+		newTarget = targetPrefab.instance()
+		world.add_child(newTarget)
+		newTarget.global_transform.origin = bulletDestination.global_transform.origin
 	newBullet.global_transform.origin = bulletOrigin.global_transform.origin
-	newTarget.global_transform.origin = bulletDestination.global_transform.origin
 	newTarget.set_id(bulletCount)
 	newBullet.setTarget(newTarget)
+
+func get_target(answer):
+	for c in enemy_parent.get_children():
+		if c.get_answer() == answer and !c.targeted:
+			c.target()
+			return c
+	return null

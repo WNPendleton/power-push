@@ -21,15 +21,18 @@ func _process(delta):
 	model.transform = model.transform.rotated(Vector3.LEFT, rotationVector.y * delta * rotationSpeed)
 	model.transform = model.transform.rotated(Vector3.FORWARD, rotationVector.z * delta * rotationSpeed)
 	
-	tween.interpolate_property(self, "translation", self.global_transform.origin, target.global_transform.origin, travel_time, Tween.TRANS_SINE, Tween.EASE_OUT_IN)
-	tween.start()
+	if is_instance_valid(target):
+		tween.interpolate_property(self, "translation", self.global_transform.origin, target.global_transform.origin, travel_time, Tween.TRANS_SINE, Tween.EASE_OUT_IN)
+		tween.start()
+	else:
+		queue_free()
 	
 func setTarget(newTarget):
 	target = newTarget
 	id = newTarget.get_id()
 
 func _on_Bullet_area_entered(area):
-	if area.has_method("get_id"):
-		if area.get_id() == id:
-			area.destroy()
+	if area.get_parent().has_method("get_id"):
+		if area.get_parent().get_id() == id:
+			area.get_parent().destroy()
 			queue_free()
