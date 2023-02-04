@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://fonts/Roboto.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://materials/Circuit.tres" type="Material" id=3]
+[ext_resource path="res://materials/StainedGlass.tres" type="Material" id=4]
+[ext_resource path="res://models/cube.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://scripts/ExampleSquare.gd" type="Script" id=6]
+[ext_resource path="res://scripts/ExampleCube.gd" type="Script" id=7]
+[ext_resource path="res://scripts/ExampleTesseract.gd" type="Script" id=8]
+[ext_resource path="res://models/hollow-cube.obj" type="ArrayMesh" id=9]
 
 [node name="Game" type="Node"]
 
@@ -33,14 +40,14 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="UI/Main/VBoxContainer"]
-margin_top = 249.0
+margin_top = 263.0
 margin_right = 171.0
-margin_bottom = 285.0
+margin_bottom = 292.0
 custom_fonts/font = ExtResource( 1 )
 text = "Power Push"
 
 [node name="Start" type="Button" parent="UI/Main/VBoxContainer"]
-margin_top = 305.0
+margin_top = 312.0
 margin_right = 171.0
 margin_bottom = 347.0
 custom_fonts/font = ExtResource( 1 )
@@ -49,27 +56,32 @@ text = "Start"
 [node name="Instructions" type="Button" parent="UI/Main/VBoxContainer"]
 margin_top = 367.0
 margin_right = 171.0
-margin_bottom = 409.0
+margin_bottom = 402.0
 custom_fonts/font = ExtResource( 1 )
 text = "Instructions"
 
 [node name="Credits" type="Button" parent="UI/Main/VBoxContainer"]
-margin_top = 429.0
+margin_top = 422.0
 margin_right = 171.0
-margin_bottom = 471.0
+margin_bottom = 457.0
 custom_fonts/font = ExtResource( 1 )
 text = "Credits"
 
 [node name="Instructions" type="Control" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Instructions"]
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -120.5
-margin_right = 120.5
+margin_left = -398.5
+margin_top = 20.0
+margin_right = 398.5
+margin_bottom = -20.0
 custom_constants/separation = 20
 alignment = 1
 __meta__ = {
@@ -77,16 +89,132 @@ __meta__ = {
 }
 
 [node name="Instructions" type="Label" parent="UI/Instructions/VBoxContainer"]
-margin_top = 311.0
-margin_right = 241.0
-margin_bottom = 347.0
+margin_top = 86.0
+margin_right = 797.0
+margin_bottom = 211.0
 custom_fonts/font = ExtResource( 1 )
-text = "Shoot the baddies"
+text = "Use the number keys on your keyboard to target the cannon!
+Type the correct root of a shape to target it!
+Press Enter to fire the cannon!
+Press Backspace or Delete to remove a number you typed!"
+align = 1
+
+[node name="GridContainer" type="GridContainer" parent="UI/Instructions/VBoxContainer"]
+margin_left = 170.0
+margin_top = 231.0
+margin_right = 626.0
+margin_bottom = 539.0
+size_flags_horizontal = 4
+columns = 2
+
+[node name="Square" type="ViewportContainer" parent="UI/Instructions/VBoxContainer/GridContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Viewport" type="Viewport" parent="UI/Instructions/VBoxContainer/GridContainer/Square"]
+size = Vector2( 100, 100 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="UI/Instructions/VBoxContainer/GridContainer/Square/Viewport"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 5 )
+
+[node name="Spatial" type="Spatial" parent="UI/Instructions/VBoxContainer/GridContainer/Square/Viewport"]
+script = ExtResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="UI/Instructions/VBoxContainer/GridContainer/Square/Viewport/Spatial"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0, 0, 0, 5.5 )
+mesh = ExtResource( 5 )
+material/0 = null
+
+[node name="Label" type="Label" parent="UI/Instructions/VBoxContainer/GridContainer"]
+margin_left = 104.0
+margin_top = 19.0
+margin_right = 456.0
+margin_bottom = 80.0
+custom_fonts/font = ExtResource( 1 )
+text = "This is a square, type its square
+root into the cannon to target it!"
+align = 1
+
+[node name="Cube" type="ViewportContainer" parent="UI/Instructions/VBoxContainer/GridContainer"]
+margin_top = 104.0
+margin_right = 100.0
+margin_bottom = 204.0
+
+[node name="Viewport" type="Viewport" parent="UI/Instructions/VBoxContainer/GridContainer/Cube"]
+size = Vector2( 100, 100 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="UI/Instructions/VBoxContainer/GridContainer/Cube/Viewport"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 5, 0, 5 )
+
+[node name="Spatial" type="Spatial" parent="UI/Instructions/VBoxContainer/GridContainer/Cube/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5.5 )
+script = ExtResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="UI/Instructions/VBoxContainer/GridContainer/Cube/Viewport/Spatial"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+mesh = ExtResource( 5 )
+material/0 = null
+
+[node name="Label2" type="Label" parent="UI/Instructions/VBoxContainer/GridContainer"]
+margin_left = 104.0
+margin_top = 123.0
+margin_right = 456.0
+margin_bottom = 184.0
+custom_fonts/font = ExtResource( 1 )
+text = "This is a cube, type its cube
+root into the cannon to target it!"
+align = 1
+
+[node name="Tesseract" type="ViewportContainer" parent="UI/Instructions/VBoxContainer/GridContainer"]
+margin_top = 208.0
+margin_right = 100.0
+margin_bottom = 308.0
+
+[node name="Viewport" type="Viewport" parent="UI/Instructions/VBoxContainer/GridContainer/Tesseract"]
+size = Vector2( 100, 100 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Camera" type="Camera" parent="UI/Instructions/VBoxContainer/GridContainer/Tesseract/Viewport"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 10, 0, 5 )
+
+[node name="Spatial" type="Spatial" parent="UI/Instructions/VBoxContainer/GridContainer/Tesseract/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 5.5 )
+script = ExtResource( 8 )
+
+[node name="MeshInstance" type="MeshInstance" parent="UI/Instructions/VBoxContainer/GridContainer/Tesseract/Viewport/Spatial"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0 )
+mesh = ExtResource( 9 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="UI/Instructions/VBoxContainer/GridContainer/Tesseract/Viewport/Spatial"]
+transform = Transform( 0.06, 0, 0, 0, 0.06, 0, 0, 0, 0.06, 0, 0, 0 )
+mesh = ExtResource( 9 )
+material/0 = null
+
+[node name="Label3" type="Label" parent="UI/Instructions/VBoxContainer/GridContainer"]
+margin_left = 104.0
+margin_top = 227.0
+margin_right = 456.0
+margin_bottom = 288.0
+custom_fonts/font = ExtResource( 1 )
+text = "This is a tesseract, type its fourth
+root into the cannon to target it!"
+align = 1
 
 [node name="Return" type="Button" parent="UI/Instructions/VBoxContainer"]
-margin_top = 367.0
-margin_right = 241.0
-margin_bottom = 409.0
+margin_left = 357.0
+margin_top = 559.0
+margin_right = 439.0
+margin_bottom = 594.0
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 1 )
 text = "Return"
 
@@ -103,22 +231,33 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -344.0
 margin_right = 344.0
+custom_constants/separation = 20
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="UI/Credits/VBoxContainer"]
-margin_top = 319.0
+margin_top = 206.0
 margin_right = 688.0
-margin_bottom = 355.0
+margin_bottom = 459.0
 custom_fonts/font = ExtResource( 1 )
-text = "I made this game and I used the font Roboto I guess"
+text = "Game by Walker Pendleton
+
+Created for Global Game Jam 2023
+
+Special thanks to:
+Godot Engine
+Paint.net
+The Blender Foundation"
+align = 1
 
 [node name="Return" type="Button" parent="UI/Credits/VBoxContainer"]
-margin_top = 359.0
-margin_right = 688.0
-margin_bottom = 401.0
+margin_left = 303.0
+margin_top = 479.0
+margin_right = 385.0
+margin_bottom = 514.0
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 1 )
 text = "Return"
 __meta__ = {
@@ -128,10 +267,16 @@ __meta__ = {
 [node name="World" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="World"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.99972 )
 current = true
 
-[node name="CSGBox" type="CSGBox" parent="World"]
-transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 0.1, 0, 0, -1.84174 )
+[node name="Stained Glass" type="CSGBox" parent="World"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 0.1, 0, 0, -0.412719 )
+material_override = ExtResource( 4 )
+
+[node name="Circuit" type="CSGBox" parent="World"]
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 0.1, 0, 0, -1.50315 )
+material = ExtResource( 3 )
 
 [connection signal="pressed" from="UI/Main/VBoxContainer/Start" to="UI" method="_on_Start_pressed"]
 [connection signal="pressed" from="UI/Main/VBoxContainer/Instructions" to="UI" method="_on_Instructions_pressed"]

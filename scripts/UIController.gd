@@ -4,6 +4,7 @@ var points = 0
 
 onready var lives = $HUD/HBoxContainer/Lives
 onready var score = $HUD/HBoxContainer/Score
+onready var camera = get_tree().get_current_scene().get_node("World/Camera")
 
 func _ready():
 	$HUD.show()
@@ -23,6 +24,7 @@ func do_game_over():
 	$GameOverScreen/VBoxContainer/FinalScore.text = "Final Score: " + str(points)
 	$HUD.hide()
 	$GameOverScreen.show()
+	camera.cancel_shake()
 	Engine.time_scale = 0
 
 func _on_Restart_pressed():

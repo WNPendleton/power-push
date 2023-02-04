@@ -25,8 +25,10 @@ func set_answer(new_answer):
 func _on_Area_area_entered(area):
 	if area.has_method("damage"):
 		area.damage()
-		queue_free()
+		do_big_shake()
+		do_death_animation_then_delete()
 
 func destroy():
 	UI.score_points(3 * answer)
-	queue_free()
+	do_little_shake()
+	do_death_animation_then_delete()

@@ -22,9 +22,11 @@ func set_answer(new_answer):
 
 func _on_Area_area_entered(area):
 	if area.has_method("damage"):
+		do_big_shake()
 		area.damage()
-		queue_free()
+		do_death_animation_then_delete()
 
 func destroy():
+	do_little_shake()
 	UI.score_points(2 * answer)
-	queue_free()
+	do_death_animation_then_delete()
