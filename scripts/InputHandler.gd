@@ -10,7 +10,7 @@ onready var world = get_tree().get_current_scene().get_node("World")
 onready var cannon = world.get_node("Cannon")
 onready var bulletDestination = cannon.get_node("BulletDestination")
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("input_0"):
 		value += "0"
 	if Input.is_action_just_pressed("input_1"):
@@ -34,14 +34,17 @@ func _process(delta):
 	if Input.is_action_just_pressed("input_delete"):
 		value = value.left(value.length() - 1)
 	if Input.is_action_just_pressed("input_send"):
-		bulletCount += 1
+		do_shoot()
 		value = ""
-		var newBullet = bulletPrefab.instance()
-		newBullet.global_transform.origin = bulletOrigin.global_transform.origin
-		var newTarget = targetPrefab.instance()
-		newTarget.global_transform.origin = bulletDestination.global_transform.origin
-		newTarget.set_id(bulletCount)
-		world.add_child(newTarget)
-		newBullet.setTarget(newTarget)
-		world.add_child(newBullet)
 	text = value
+
+func do_shoot():
+	bulletCount += 1
+	var newBullet = bulletPrefab.instance()
+	world.add_child(newBullet)
+	var newTarget = targetPrefab.instance()
+	world.add_child(newTarget)
+	newBullet.global_transform.origin = bulletOrigin.global_transform.origin
+	newTarget.global_transform.origin = bulletDestination.global_transform.origin
+	newTarget.set_id(bulletCount)
+	newBullet.setTarget(newTarget)

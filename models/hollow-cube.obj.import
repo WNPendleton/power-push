@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/hollow-cube.obj-a30d40c0610136c746b096208d218032.mesh"
+
+[deps]
+
+files=[ "res://.import/hollow-cube.obj-a30d40c0610136c746b096208d218032.mesh" ]
+
+source_file="res://models/hollow-cube.obj"
+dest_files=[ "res://.import/hollow-cube.obj-a30d40c0610136c746b096208d218032.mesh", "res://.import/hollow-cube.obj-a30d40c0610136c746b096208d218032.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

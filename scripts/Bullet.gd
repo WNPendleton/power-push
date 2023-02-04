@@ -11,8 +11,6 @@ export var travel_time = 2
 onready var model = $Model
 onready var tween = $Tween
 
-onready var target1 = get_tree().get_current_scene().get_node("World/DefaultTarget1")
-onready var target2 = get_tree().get_current_scene().get_node("World/DefaultTarget2")
 onready var cannon = get_tree().get_current_scene().get_node("World/Cannon")
 
 func _ready():
