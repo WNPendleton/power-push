@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://fonts/Roboto.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/MainMenu.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://scripts/RainbowText.gd" type="Script" id=16]
 [ext_resource path="res://scripts/Options.gd" type="Script" id=17]
 [ext_resource path="res://scripts/Camera.gd" type="Script" id=18]
+[ext_resource path="res://fonts/RobotoSmall.tres" type="DynamicFont" id=19]
 
 [node name="Game" type="Node"]
 
@@ -30,6 +31,7 @@ __meta__ = {
 }
 
 [node name="Main" type="Control" parent="UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -76,7 +78,7 @@ __meta__ = {
 size = Vector2( 100, 100 )
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="Spatial" type="Spatial" parent="UI/Main/VBoxContainer/Logo/Shapes/Viewport"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2.87461, -0.246884, 3.4904 )
@@ -174,7 +176,7 @@ __meta__ = {
 margin_top = 106.0
 margin_right = 639.0
 margin_bottom = 231.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 19 )
 text = "Use the number keys on your keyboard to target the cannon!
 Type the correct root of a shape to target it!
 Press Enter to fire the cannon!
@@ -194,7 +196,7 @@ margin_right = 100.0
 margin_bottom = 100.0
 
 [node name="Viewport" type="Viewport" parent="UI/Instructions/VBoxContainer/GridContainer/Square"]
-size = Vector2( 100, 100 )
+size = Vector2( 75, 75 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 0
@@ -216,7 +218,7 @@ margin_left = 104.0
 margin_top = 19.0
 margin_right = 456.0
 margin_bottom = 80.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 19 )
 text = "This is a square, type its square
 root into the cannon to target it!"
 align = 1
@@ -227,7 +229,7 @@ margin_right = 100.0
 margin_bottom = 204.0
 
 [node name="Viewport" type="Viewport" parent="UI/Instructions/VBoxContainer/GridContainer/Cube"]
-size = Vector2( 100, 100 )
+size = Vector2( 75, 75 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 0
@@ -249,7 +251,7 @@ margin_left = 104.0
 margin_top = 123.0
 margin_right = 456.0
 margin_bottom = 184.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 19 )
 text = "This is a cube, type its cube
 root into the cannon to target it!"
 align = 1
@@ -260,7 +262,7 @@ margin_right = 100.0
 margin_bottom = 308.0
 
 [node name="Viewport" type="Viewport" parent="UI/Instructions/VBoxContainer/GridContainer/Tesseract"]
-size = Vector2( 100, 100 )
+size = Vector2( 75, 75 )
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 0
@@ -287,7 +289,7 @@ margin_left = 104.0
 margin_top = 227.0
 margin_right = 456.0
 margin_bottom = 288.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 19 )
 text = "This is a tesseract, type its fourth
 root into the cannon to target it!"
 align = 1
@@ -302,7 +304,6 @@ custom_fonts/font = ExtResource( 1 )
 text = "Return"
 
 [node name="Options" type="Control" parent="UI"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 17 )
@@ -313,17 +314,17 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Options"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 300.0
-margin_right = -300.0
+margin_left = 200.0
+margin_right = -200.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Options" type="Label" parent="UI/Options/VBoxContainer"]
-margin_left = 298.0
+margin_left = 398.0
 margin_top = 276.0
-margin_right = 381.0
+margin_right = 481.0
 margin_bottom = 305.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 1 )
@@ -332,13 +333,13 @@ align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Options/VBoxContainer"]
 margin_top = 309.0
-margin_right = 680.0
+margin_right = 880.0
 margin_bottom = 338.0
 custom_constants/separation = 25
 alignment = 1
 
 [node name="Music" type="Label" parent="UI/Options/VBoxContainer/HBoxContainer"]
-margin_right = 327.0
+margin_right = 427.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
@@ -346,8 +347,8 @@ text = "Music"
 align = 2
 
 [node name="MusicSlider" type="HSlider" parent="UI/Options/VBoxContainer/HBoxContainer"]
-margin_left = 352.0
-margin_right = 680.0
+margin_left = 452.0
+margin_right = 880.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 max_value = 10.0
@@ -360,13 +361,13 @@ __meta__ = {
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UI/Options/VBoxContainer"]
 margin_top = 342.0
-margin_right = 680.0
+margin_right = 880.0
 margin_bottom = 371.0
 custom_constants/separation = 25
 alignment = 1
 
 [node name="SFX" type="Label" parent="UI/Options/VBoxContainer/HBoxContainer2"]
-margin_right = 327.0
+margin_right = 427.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
@@ -374,8 +375,8 @@ text = "Sound Effects"
 align = 2
 
 [node name="SFXSlider" type="HSlider" parent="UI/Options/VBoxContainer/HBoxContainer2"]
-margin_left = 352.0
-margin_right = 680.0
+margin_left = 452.0
+margin_right = 880.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 max_value = 10.0
@@ -388,12 +389,12 @@ __meta__ = {
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="UI/Options/VBoxContainer"]
 margin_top = 375.0
-margin_right = 680.0
+margin_right = 880.0
 margin_bottom = 404.0
 custom_constants/separation = 25
 
 [node name="VFX" type="Label" parent="UI/Options/VBoxContainer/HBoxContainer3"]
-margin_right = 327.0
+margin_right = 427.0
 margin_bottom = 29.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
@@ -401,8 +402,8 @@ text = "Visual Effects"
 align = 2
 
 [node name="VFXSlider" type="HSlider" parent="UI/Options/VBoxContainer/HBoxContainer3"]
-margin_left = 352.0
-margin_right = 680.0
+margin_left = 452.0
+margin_right = 880.0
 margin_bottom = 16.0
 size_flags_horizontal = 3
 max_value = 10.0
@@ -414,9 +415,9 @@ __meta__ = {
 }
 
 [node name="Return" type="Button" parent="UI/Options/VBoxContainer"]
-margin_left = 299.0
+margin_left = 399.0
 margin_top = 408.0
-margin_right = 381.0
+margin_right = 481.0
 margin_bottom = 443.0
 size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 1 )
@@ -446,7 +447,7 @@ __meta__ = {
 margin_top = 126.0
 margin_right = 531.0
 margin_bottom = 539.0
-custom_fonts/font = ExtResource( 1 )
+custom_fonts/font = ExtResource( 19 )
 text = "Game by Walker Pendleton (walkerpendleton.dev)
 
 Music by Permadeaf (permadeaf.com)
