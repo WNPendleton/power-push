@@ -6,6 +6,7 @@ onready var lives = $HUD/HBoxContainer/Lives
 onready var score = $HUD/HBoxContainer/Score
 onready var camera = get_tree().get_current_scene().get_node("World/Camera")
 onready var empty_life_texture = preload("res://sprites/empty_life.png")
+onready var audio_bus_layout = preload("res://default_bus_layout.tres")
 
 func _ready():
 	$HUD.show()

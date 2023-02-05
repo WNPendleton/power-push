@@ -1,5 +1,7 @@
 extends Control
 
+onready var audio_bus_layout = preload("res://default_bus_layout.tres")
+
 func _ready():
 	$Instructions.hide()
 	$Options.hide()
