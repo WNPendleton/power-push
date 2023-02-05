@@ -3,6 +3,8 @@ extends Label
 var value = ""
 var bulletCount = 0
 
+var base_vfx_level
+
 onready var targetPrefab = preload("res://prefabs/Target.tscn")
 onready var bulletPrefab = preload("res://prefabs/Bullet.tscn")
 onready var bulletOrigin = get_tree().get_current_scene().get_node("World/Cannon/BulletOrigin")
@@ -11,6 +13,9 @@ onready var cannon = world.get_node("Cannon")
 onready var bulletDestination = cannon.get_node("BulletDestination")
 onready var enemy_parent = world.get_node("EnemySpawner")
 onready var shoot_sound = get_tree().get_current_scene().get_node("ShootSound")
+
+func _ready():
+	base_vfx_level = Globals.vfx_level
 
 func _process(_delta):
 	if Input.is_action_just_pressed("input_0"):
@@ -37,6 +42,10 @@ func _process(_delta):
 		value = value.left(value.length() - 1)
 	if Input.is_action_just_pressed("input_send"):
 		do_shoot()
+		if int(value) == 9001:
+			Globals.vfx_level = 200
+		if int(value) == 8999:
+			Globals.vfx_level = base_vfx_level
 		value = ""
 	text = value
 

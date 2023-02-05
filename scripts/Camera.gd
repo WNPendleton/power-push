@@ -10,15 +10,17 @@ export var base_position = Vector3(0,0,2)
 
 func _ready():
 	transform.origin = base_position
+	shake_multiplier = Globals.vfx_level / 5
 
 func _process(delta):
 	timer += delta
 	if timer < shake_duration:
-		transform.origin = base_position + (Vector3(randf(), randf(), 0).normalized() * shake_power * (1 - (timer/shake_duration)))
+		transform.origin = base_position + (Vector3(randf(), randf(), 0).normalized() * (shake_power * shake_multiplier) * (1 - (timer/shake_duration)))
 	else:
 		transform.origin = base_position
 
 func do_camera_shake(power, duration):
+	shake_multiplier = Globals.vfx_level / 5
 	timer = 0
 	shake_power = power
 	shake_duration = duration

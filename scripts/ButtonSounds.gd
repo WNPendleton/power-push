@@ -11,3 +11,7 @@ func _on_Button_mouse_entered():
 func _on_Button_pressed():
 	pitch_scale = 0.75
 	play()
+
+func _on_SFXSlider_value_changed(_value):
+	pitch_scale = 1
+	play()
