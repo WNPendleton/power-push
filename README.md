@@ -7,4 +7,4 @@ and tesseracts, their fourth root.
 
 Executable exported builds for Windows and Linux can be found in the 'builds' folder.
 
-The game can also be played in browser [here](https://www.walkerpendleton.dev/public/games/powerpush/PowerPush.html)
+The game can also be played in browser [here](https://www.walkerpendleton.dev/games/powerpush/PowerPush.html)
